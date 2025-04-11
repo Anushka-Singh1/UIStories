@@ -6,7 +6,7 @@ type Badgeprop = {
 export const Badge = ({ label, color }: Badgeprop) => {
     return (
       <span
-        className={`text-white px-2 py-1 rounded`}
+        className={'text-white px-2 py-1 rounded'}
         style={{ backgroundColor: color }}
       >
         {label}
