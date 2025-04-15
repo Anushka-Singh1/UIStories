@@ -34,11 +34,16 @@ const meta: Meta<typeof SplitHero> = {
       description: "Background color for the hero section.",
       defaultValue: "#b5b198",
     },
+    buttonColor: {
+      control: "color",
+      description: "Background color for the button.",
+      defaultValue: "black",
+    },
   },
   parameters: {
     docs: {
       source: {
-        code: `import Image from "../../assets/Hero/SplitHero.png"
+        code: `import Image from "../../assets/Hero/SplitHero.png";
 
 type HeroProps = {
   heading: string;
@@ -46,6 +51,7 @@ type HeroProps = {
   buttonText?: string;
   image?: string;
   bgColor?: string;
+  buttonColor?: string;
 };
 
 export function SplitHero({
@@ -54,6 +60,7 @@ export function SplitHero({
   buttonText = "Shop Now",
   image = Image,
   bgColor = "#b5b198",
+  buttonColor = "black",
 }: HeroProps) {
   const defaultImage = "https://via.placeholder.com/600x400";
 
@@ -66,7 +73,10 @@ export function SplitHero({
         <div className="p-6 flex flex-col justify-center">
           <h1 className="text-4xl font-bold mt-6">{heading}</h1>
           <p className="text-xl mt-4 font-serif text-justify">{description}</p>
-          <button className="bg-black text-white px-4 py-2 rounded-lg mt-6 w-fit">
+          <button
+            style={{ backgroundColor: buttonColor }}
+            className="text-white px-4 py-2 rounded-lg mt-6 w-fit"
+          >
             {buttonText}
           </button>
         </div>
@@ -81,10 +91,11 @@ export function SplitHero({
     </div>
   );
 }
+
 `,
       },
       description: {
-        story: `**Usage Example:**\n\n\`\`\`tsx\n<SplitHero heading="Welcome" description="Shop Confidently" buttonText="Shop Now" image={Image} bgColor="#b5b198" />\n\`\`\``,
+        story: `**Usage Example:**\n\n\`\`\`tsx\n<SplitHero heading="Welcome" description="Shop Confidently" buttonText="Shop Now" image={Image} bgColor="#b5b198" buttonColor= "black" />\n\`\`\``,
       },
     },
   },
@@ -101,6 +112,7 @@ export const Primary: Story = {
       "Shop confidently with our premium collection of market-leading products. Enjoy seamless online shopping, unbeatable prices, and fast, reliable delivery on every order.",
     buttonText: "Shop Now",
     image: Image,
-    bgColor: "#b5b198",
+        bgColor: "#b5b198",
+    buttonColor: "black",
   },
 };

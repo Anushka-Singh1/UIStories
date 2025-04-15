@@ -1,4 +1,4 @@
-import Image from "../../assets/Hero/SplitHero.png"
+import Image from "../../assets/Hero/SplitHero.png";
 
 type HeroProps = {
   heading: string;
@@ -6,6 +6,7 @@ type HeroProps = {
   buttonText?: string;
   image?: string;
   bgColor?: string;
+  buttonColor?: string;
 };
 
 export function SplitHero({
@@ -14,6 +15,7 @@ export function SplitHero({
   buttonText = "Shop Now",
   image = Image,
   bgColor = "#b5b198",
+  buttonColor = "black",
 }: HeroProps) {
   const defaultImage = "https://via.placeholder.com/600x400";
 
@@ -26,7 +28,10 @@ export function SplitHero({
         <div className="p-6 flex flex-col justify-center">
           <h1 className="text-4xl font-bold mt-6">{heading}</h1>
           <p className="text-xl mt-4 font-serif text-justify">{description}</p>
-          <button className="bg-black text-white px-4 py-2 rounded-lg mt-6 w-fit">
+          <button
+            style={{ backgroundColor: buttonColor }}
+            className="text-white px-4 py-2 rounded-lg mt-6 w-fit"
+          >
             {buttonText}
           </button>
         </div>
