@@ -50,7 +50,7 @@ export default meta;
 
 type Story = StoryObj<typeof Footer>;
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
     color: "black", 
   },
