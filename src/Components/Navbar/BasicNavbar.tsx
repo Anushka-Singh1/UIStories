@@ -21,24 +21,24 @@ export const BasicNavbar = ({color} : Navprop) => {
 
   return (
     <nav style={{ backgroundColor: color }} className="p-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="text-white text-lg font-bold">Logo</div>
+      <div className="container mx-auto flex items-center justify-center relative">
+        <div className="absolute left-4 text-white text-lg font-bold">Logo</div>
 
-        <div className="lg:hidden" onClick={toggleMenu}>
-          <FaBars className="w-6 h-6 text-white cursor-pointer" />
-        </div>
-
-        <div className="hidden lg:flex space-x-6">
+        <div className="hidden lg:flex space-x-10">
           {NavOptions.map((option) => (
             <a key={option.name} href={option.link} className={styleOptions}>
               {option.name}
             </a>
           ))}
         </div>
+
+        <div className="absolute right-4 lg:hidden" onClick={toggleMenu}>
+          <FaBars className="w-6 h-6 text-white cursor-pointer" />
+        </div>
       </div>
 
       {isOpen && (
-        <div className="flex flex-col items-start mt-4 space-y-2 lg:hidden px-4">
+        <div className="flex flex-col items-center mt-4 space-y-2 lg:hidden">
           {NavOptions.map((option) => (
             <a key={option.name} href={option.link} className={styleOptions}>
               {option.name}
