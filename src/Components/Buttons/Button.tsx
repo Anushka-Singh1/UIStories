@@ -1,12 +1,13 @@
 type ButtonProps = {
-    label: string;
-    color: string;
+  label: string;
+  color: string;
+  TextColor: string;
 };
 
-export const Button = ({ label, color }: ButtonProps) => {
+export const Button = ({ label, color, TextColor }: ButtonProps) => {
   return (
-      <button className="text-white px-4 py-2 rounded"
-        style={{ backgroundColor: color }}>
+      <button className="px-4 py-2 rounded"
+        style={{ backgroundColor: color, color: TextColor }}>
       {label}
     </button>
   );

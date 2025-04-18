@@ -9,21 +9,23 @@ const meta: Meta<typeof Button> = {
     docs: {
       source: {
         code: `type ButtonProps = {
-    label: string;
-    color: string;
+  label: string;
+  color: string;
+  TextColor: string;
 };
 
-export const Button = ({ label, color }: ButtonProps) => {
+export const Button = ({ label, color, TextColor }: ButtonProps) => {
   return (
-      <button className="text-white px-4 py-2 rounded"
-        style={{ backgroundColor: color }}>
+      <button className="px-4 py-2 rounded"
+        style={{ backgroundColor: color, color: TextColor }}>
       {label}
     </button>
   );
-};`,
+};
+`,
       },
       description: {
-        story: `**Usage Example:**\n\n\`\`\`tsx\n<Button label="Click Me!" color="green" />\n\`\`\``,
+        story: `**Usage Example:**\n\n\`\`\`tsx\n<Button label="Click Me!" color="green" TextColor="black" />\n\`\`\``,
       },
     },
   },
@@ -32,9 +34,34 @@ export const Button = ({ label, color }: ButtonProps) => {
 export default meta;
 type Story = StoryObj<typeof Button>;
 
-export const Primary: Story = {
+export const Success: Story = {
   args: {
     label: "Click Me!",
     color: "green",
+    TextColor: "white",
   },
 };
+  
+  export const Warning: Story = {
+    args: {
+      label: "Click Me!",
+      color: "yellow",
+      TextColor: "black",
+    },
+  };
+export const Danger: Story = {
+  args: {
+    label: "Click Me!",
+    color: "red",
+    TextColor: "white",
+  },  
+};
+export const Info: Story = {
+  args: {
+    label: "Click Me!",
+    color: "blue",
+    TextColor: "white",
+  },
+};
+
+
