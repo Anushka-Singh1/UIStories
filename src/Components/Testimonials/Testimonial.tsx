@@ -20,13 +20,13 @@ export interface TestimonialsProps {
 }
 
 const Testimonials = ({
-  title="Testimonials Title",
-  subtitle= "Testimonials Subtitle",
-  description= "Testimonials Description",
+  title = "Testimonials Title",
+  subtitle = "Testimonials Subtitle",
+  description = "Testimonials Description",
   testimonials,
-  totalReviews= 1,
-  averageRating= 1,
-  cardColor= "#ffffff",
+  totalReviews = 1,
+  averageRating = 1,
+  cardColor = "#ffffff",
 }: TestimonialsProps) => {
   const itemsPerPage = 3;
   const [currentPage, setCurrentPage] = useState(1);
@@ -67,7 +67,9 @@ const Testimonials = ({
       <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
         {title}
       </h2>
-      <p className="text-gray-600 max-w-3xl mb-10 text-base">{description}</p>
+      <p className="text-gray-600 max-w-3xl mb-10 text-base  hidden md:block">
+        {description}
+      </p>
 
       <div className="relative">
         <div
@@ -81,7 +83,8 @@ const Testimonials = ({
             <div
               key={startIndex + index}
               style={{ backgroundColor: cardColor }}
-              className="p-6 rounded-md shadow-sm hover:shadow-md transition-all"
+              className={`p-6 rounded-md shadow-sm hover:shadow-md transition-all
+                ${index === 0 ? "block" : "hidden"} md:block`}
             >
               <div className="flex gap-1 mb-3 text-green-500">
                 {[...Array(testimonial.rating)].map((_, i) => (
@@ -125,14 +128,14 @@ const Testimonials = ({
       </div>
 
       <div className="mt-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div className="flex items-center gap-2 text-sm text-gray-700">
+        <div className="flex items-center gap-2 text-sm text-gray-700 hidden md:block">
           <FaStar className="text-green-500" />
           <p>
-            Trustpilot
+            Trustpilot{" "}
             <span className="text-green-600 font-semibold">
-              {averageRating}
+              {averageRating}{" "}
             </span>
-            Rating based on
+            Rating based on{" "}
             <span className="font-semibold">{totalReviews}</span> reviews
           </p>
         </div>
