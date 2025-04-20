@@ -27,12 +27,38 @@ const Testimonials = ({
   averageRating = 1,
   cardColor = "#ffffff",
 }: TestimonialsProps) => {
-  const itemsPerPage = 3;
+  // Adjust items per page based on screen width
+  const [isMobile, setIsMobile] = useState(false);
+  const itemsPerPage = isMobile ? 1 : 3;
+
   const [currentPage, setCurrentPage] = useState(0);
-  const totalPages = Math.ceil(testimonials.length / itemsPerPage);
   const [slideDirection, setSlideDirection] = useState<"left" | "right" | null>(
     null
   );
+
+  // Calculate total pages based on items per page
+  const totalPages = Math.ceil(testimonials.length / itemsPerPage);
+
+  // Check screen size on component mount and window resize
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Initial check
+    checkScreenSize();
+
+    // Add event listener for window resize
+    window.addEventListener("resize", checkScreenSize);
+
+    // Clean up
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
+  // Reset current page when items per page changes to avoid empty pages
+  useEffect(() => {
+    setCurrentPage((prev) => Math.min(prev, totalPages - 1));
+  }, [itemsPerPage, totalPages]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -76,26 +102,28 @@ const Testimonials = ({
   };
 
   return (
-    <section className="bg-white py-16 px-6 md:px-20 font-sans">
+    <section className="bg-white py-8 md:py-16 px-4 md:px-20 font-sans">
       <p className="uppercase text-sm text-gray-500 font-medium tracking-widest mb-2">
         {subtitle}
       </p>
-      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+      <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
         {title}
       </h2>
-      <p className="text-gray-600 max-w-3xl mb-10 text-base">{description}</p>
+      <p className="text-gray-600 max-w-3xl mb-6 md:mb-10 text-base">
+        {description}
+      </p>
 
       <div className="relative overflow-hidden">
         <div
-          className={`flex transition-transform duration-300 ease-in-out w-full`}
+          className="flex transition-transform duration-300 ease-in-out w-full"
           style={{ transform: getTranslateX() }}
         >
-          <div className="grid md:grid-cols-3 gap-6 w-full">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 w-full">
             {visibleTestimonials.map((testimonial, index) => (
               <div
                 key={index}
                 style={{ backgroundColor: cardColor }}
-                className="p-6 rounded-md shadow-sm hover:shadow-md transition-all"
+                className="p-4 md:p-6 rounded-md shadow-sm hover:shadow-md transition-all mx-auto w-full max-w-sm md:max-w-none"
               >
                 <div className="flex gap-1 mb-3 text-green-500">
                   {[...Array(testimonial.rating)].map((_, i) => (
@@ -113,7 +141,7 @@ const Testimonials = ({
         </div>
       </div>
 
-      <div className="mt-6 flex justify-center text-sm text-gray-600 font-medium">
+      <div className="mt-4 md:mt-6 flex justify-center text-sm text-gray-600 font-medium">
         Page {currentPage + 1} of {totalPages}
       </div>
 
@@ -125,11 +153,12 @@ const Testimonials = ({
               index === currentPage ? "bg-green-500" : "bg-gray-300"
             }`}
             onClick={() => handleDotClick(index)}
+            aria-label={`Go to page ${index + 1}`}
           ></button>
         ))}
       </div>
 
-      <div className="mt-10 flex justify-center text-sm text-gray-700">
+      <div className="mt-6 md:mt-10 flex justify-center text-sm text-gray-700">
         <FaStar className="text-green-500 mr-1" />
         Trustpilot
         <span className="text-green-600 font-semibold ml-1">
