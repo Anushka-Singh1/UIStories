@@ -56,7 +56,7 @@ const AutoScrollCarousel = ({
         {heading}
       </h2>
 
-      <div className="relative w-full h-[60%] bg-white rounded-lg shadow-lg overflow-hidden">
+      <div className="relative w-full h-[60%] bg-white md:rounded-lg shadow-lg overflow-hidden">
         <div
           className="flex transition-transform duration-700 ease-in-out"
           style={{ transform: `translateX(-${index * 100}%)` }}
@@ -85,7 +85,7 @@ const AutoScrollCarousel = ({
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="w-full h-96 object-cover rounded-r-lg"
+                  className="w-full h-96 object-cover md:rounded-r-lg"
                 />
               </div>
             </div>
