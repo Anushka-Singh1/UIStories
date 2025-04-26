@@ -61,11 +61,11 @@ export function LoginForm({
   };
 
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex justify-center mt-8 px-4">
       <form
         onSubmit={handleSubmit}
         style={{ backgroundColor: formBackgroundColor }}
-        className="shadow-lg rounded-xl px-8 pt-6 pb-8 m-10 w-full max-w-sm"
+        className="shadow-lg rounded-xl px-8 pt-6 pb-8 mx-auto w-full max-w-sm"
       >
         {fields.map(({ label, type, name, placeholder }) => (
           <div key={name} className="mb-4">
@@ -98,7 +98,7 @@ export function LoginForm({
             color: LoginButtonTextColor,
           }}
           type="submit"
-          className={`w-full hover:bg-blue-700 font-semibold py-2 px-4 rounded-lg transition duration-200`}
+          className="w-full hover:bg-blue-700 font-semibold py-2 px-4 rounded-lg transition duration-200"
         >
           Login
         </button>

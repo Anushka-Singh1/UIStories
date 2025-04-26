@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { LoginForm } from "../../Components/Form/LoginForm";
+import { Meta, StoryObj } from "@storybook/react";
+import { RegisterForm } from "../../Components/Form/RegisterForm";
 import { action } from "@storybook/addon-actions";
 import { z } from "zod";
 
-const meta: Meta<typeof LoginForm> = {
-  component: LoginForm,
-  title: "Components/Form/LoginForm",
+const meta: Meta<typeof RegisterForm> = {
+  title: "Components/Form/RegisterForm",
+  component: RegisterForm,
   tags: ["autodocs"],
   argTypes: {
     fields: {
@@ -17,10 +17,10 @@ const meta: Meta<typeof LoginForm> = {
     formTextColor: {
       control: "color",
     },
-    LoginButtonColor: {
+    registerButtonColor: {
       control: "color",
     },
-    LoginButtonTextColor: {
+    registerButtonTextColor: {
       control: "color",
     },
     schema: {
@@ -31,7 +31,7 @@ const meta: Meta<typeof LoginForm> = {
   parameters: {
     docs: {
       source: {
-        code: `import { useState, ChangeEvent, FormEvent } from "react";
+        code: `import { useState, FormEvent, ChangeEvent } from "react";
         import { z } from "zod";
         
         type InputField = {
@@ -41,25 +41,25 @@ const meta: Meta<typeof LoginForm> = {
           placeholder: string;
         };
         
-        type LoginFormProps = {
+        type RegisterFormProps = {
           fields: InputField[];
           formBackgroundColor?: string;
           formTextColor?: string;
-          LoginButtonColor?: string;
-          LoginButtonTextColor?: string;
+          registerButtonColor?: string;
+          registerButtonTextColor?: string;
           schema: z.ZodObject<any>;
           onSubmit?: (data: Record<string, string>) => void;
         };
         
-        export function LoginForm({
+        export function RegisterForm({
           fields,
           schema,
           onSubmit,
           formBackgroundColor = "white",
           formTextColor = "black",
-          LoginButtonColor = "Blue",
-          LoginButtonTextColor = "white",
-        }: LoginFormProps) {
+          registerButtonColor = "blue",
+          registerButtonTextColor = "white",
+        }: RegisterFormProps) {
           const initialState: Record<string, string> = {};
           fields.forEach((field) => {
             initialState[field.name] = "";
@@ -94,83 +94,75 @@ const meta: Meta<typeof LoginForm> = {
           };
         
           return (
-            <div className="flex justify-center mt-8 px-4">
-              <form
-                onSubmit={handleSubmit}
-                style={{ backgroundColor: formBackgroundColor }}
-                className="shadow-lg rounded-xl px-8 pt-6 pb-8 mx-auto w-full max-w-sm"
+            <form
+                  onSubmit={handleSubmit}
+                style={{ backgroundColor: formBackgroundColor, color: formTextColor }}
+              className={"p-6 rounded-lg w-[90%] mx-auto my-4"}
+            >
+              {fields.map((field) => (
+                <div key={field.name} className="mb-4">
+                  <label className="block mb-2">{field.label}</label>
+                  <input
+                    type={field.type}
+                    name={field.name}
+                    placeholder={field.placeholder}
+                    value={formData[field.name]}
+                    onChange={handleChange}
+                    className="w-full p-2 rounded-md border border-gray-300"
+                  />
+                  {errors[field.name] && (
+                    <span className="text-red-500 text-xs">{errors[field.name]}</span>
+                  )}
+                </div>
+              ))}
+              <button
+                      type="submit"
+                style={{ backgroundColor: registerButtonColor, color: registerButtonTextColor }}
+                className={"py-2 px-4 rounded-md border-none cursor-pointer"}
               >
-                {fields.map(({ label, type, name, placeholder }) => (
-                  <div key={name} className="mb-4">
-                    <label
-                      htmlFor={name}
-                      style={{ color: formTextColor }}
-                      className="block text-sm font-semibold mb-2"
-                    >
-                      {label}
-                    </label>
-                    <input
-                      type={type}
-                      name={name}
-                      id={name}
-                      placeholder={placeholder}
-                      value={formData[name]}
-                      onChange={handleChange}
-                      className={\`w-full px-3 py-2 border rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 \${
-                        errors[name] ? "border-red-500" : ""
-                      }\`}
-                    />
-                    {errors[name] && (
-                      <p className="text-red-500 text-sm mt-1">{errors[name]}</p>
-                    )}
-                  </div>
-                ))}
-                <button
-                  style={{
-                    backgroundColor: LoginButtonColor,
-                    color: LoginButtonTextColor,
-                  }}
-                  type="submit"
-                  className="w-full hover:bg-blue-700 font-semibold py-2 px-4 rounded-lg transition duration-200"
-                >
-                  Login
-                </button>
-              </form>
-            </div>
+                Register
+              </button>
+            </form>
           );
         }
         
         `,
       },
+
       description: {
         story: `**Usage Example:**\n\n\`\`\`tsx
-import { LoginForm } from "../../Components/Form/LoginForm";
+import { RegisterForm } from "../../Components/Form/RegisterForm";
 import { z } from "zod";
 
 // Define the Zod schema
 const schema = z.object({
+  name: z.string().min(1, { message: "Name is required" }),
   email: z.string().email({ message: "Invalid email address" }),
+  phone: z.string().min(10, { message: "Phone number must be at least 10 digits" }),
   password: z.string().min(6, { message: "Password must be at least 6 characters" }),
 });
 
 // Define the fields for the form
 const fields = [
+  { label: "Name", type: "text", name: "name", placeholder: "Enter your name" },
   { label: "Email", type: "email", name: "email", placeholder: "Enter your email" },
+  { label: "Phone", type: "tel", name: "phone", placeholder: "Enter your phone number" },
   { label: "Password", type: "password", name: "password", placeholder: "Enter your password" },
 ];
 
-<LoginForm
+// Usage of the RegisterForm component
+<RegisterForm
   fields={fields}
   schema={schema}
   formBackgroundColor="white"
   formTextColor="black"
-  LoginButtonColor="blue"
-  LoginButtonTextColor="white"
+  registerButtonColor="blue"
+  registerButtonTextColor="white"
   onSubmit={(data) => console.log(data)}
 />
 \`\`\`
 
-This example shows how to use the \`LoginForm\` component with custom fields and a Zod schema for validation. The schema ensures that the email is valid and the password meets the required length.`,
+This example demonstrates how to use the \`RegisterForm\` component with custom fields and a Zod schema for validation. The schema ensures that the name, email, phone number, and password are validated before submission.`,
       },
     },
   },
@@ -178,17 +170,28 @@ This example shows how to use the \`LoginForm\` component with custom fields and
 
 export default meta;
 
-type Story = StoryObj<typeof LoginForm>;
+type Story = StoryObj<typeof RegisterForm>;
 
 export const Default: Story = {
   args: {
-    formBackgroundColor: "white",
     fields: [
+      {
+        label: "Name",
+        type: "text",
+        name: "name",
+        placeholder: "Enter your name",
+      },
       {
         label: "Email",
         type: "email",
         name: "email",
         placeholder: "Enter your email",
+      },
+      {
+        label: "Phone",
+        type: "tel",
+        name: "phone",
+        placeholder: "Enter your phone number",
       },
       {
         label: "Password",
@@ -198,11 +201,19 @@ export const Default: Story = {
       },
     ],
     schema: z.object({
+      name: z.string().min(1, { message: "Name is required" }),
       email: z.string().email({ message: "Invalid email address" }),
+      phone: z
+        .string()
+        .min(10, { message: "Phone number must be at least 10 digits" }),
       password: z
         .string()
         .min(6, { message: "Password must be at least 6 characters" }),
     }),
+    formBackgroundColor: "#f9f9f9",
+    formTextColor: "#333",
+    registerButtonColor: "#007bff",
+    registerButtonTextColor: "#fff",
     onSubmit: action("submitted"),
   },
 };
