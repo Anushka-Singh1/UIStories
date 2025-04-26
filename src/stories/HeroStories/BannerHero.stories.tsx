@@ -57,7 +57,7 @@ export function BannerHero({
           style={{ backgroundImage: \`url(\${backgroundImage})\`, zIndex: 0 }}
         ></div>
         <div className="absolute inset-0 bg-black opacity-30 z-10"></div>
-        <div className="relative z-20 md:w-1/2 space-y-6 text-white mt-12">
+        <div className="relative z-20 md:w-1/2 space-y-6 text-white mt-12 text-left">
           <h1 className="text-5xl font-bold leading-tight">
             {heading} <br />
           </h1>
