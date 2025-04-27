@@ -171,8 +171,6 @@ const items = [
   },
 ];
 
-const ExampleUsage = () => {
-  return (
     <AutoScrollCarousel
       heading="Featured Destinations"
       color="darkblue" // Set the heading color
@@ -181,8 +179,6 @@ const ExampleUsage = () => {
       dotInactiveColor="bg-gray-300" // Inactive dot color
       items={items}
     />
-  );
-};
 
 export default ExampleUsage;
 \`\`\`
