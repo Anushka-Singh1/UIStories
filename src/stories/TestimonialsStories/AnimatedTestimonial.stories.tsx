@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import AnimatedTestimonials from "../../Components/Testimonials/AnimatedTestimonial";
+import AnimatedTestimonial from "../../Components/Testimonials/AnimatedTestimonial";
 
-const meta: Meta<typeof AnimatedTestimonials> = {
+const meta: Meta<typeof AnimatedTestimonial> = {
   title: "Components/Testimonials/AnimatedTestimonial",
-  component: AnimatedTestimonials,
+  component: AnimatedTestimonial,
   tags: ["autodocs"],
   argTypes: {
     title: { control: "text" },
@@ -40,7 +40,7 @@ const meta: Meta<typeof AnimatedTestimonials> = {
                   cardColor: string;
                 }
                 
-                const AnimatedTestimonials = ({
+                const AnimatedTestimonial = ({
                   title = "Testimonials Title",
                   subtitle = "Testimonials Subtitle",
                   description = "Testimonials Description",
@@ -187,14 +187,14 @@ const meta: Meta<typeof AnimatedTestimonials> = {
                   );
                 };
                 
-                export default AnimatedTestimonials;
+                export default AnimatedTestimonial;
                 `,
       },
       description: {
         story: `**Usage Example:**\n\n
 \`\`\`tsx
 // First, import the Testimonials component
-import AnimatedTestimonials from "../../Components/Testimonials/AnimatedTestimonial";
+import AnimatedTestimonial from "../../Components/Testimonials/AnimatedTestimonial";
 
 // Create an array of testimonial objects
 const sampleTestimonials = [
@@ -231,7 +231,7 @@ const sampleTestimonials = [
 ];
 
 // Use the Testimonials component in your JSX, passing the testimonials array and other necessary props
-<AnimatedTestimonials  
+<AnimatedTestimonial  
   title="What Our Customers Say"
   subtitle="Customer Reviews"
   description="Real feedback from our amazing clients."
@@ -249,7 +249,7 @@ const sampleTestimonials = [
 
 export default meta;
 
-type Story = StoryObj<typeof AnimatedTestimonials>;
+type Story = StoryObj<typeof AnimatedTestimonial>;
 
 const sampleTestimonials = [
   {
