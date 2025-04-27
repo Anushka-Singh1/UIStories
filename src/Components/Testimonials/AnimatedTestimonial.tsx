@@ -18,7 +18,7 @@ export interface TestimonialsProps {
   cardColor: string;
 }
 
-const Testimonials = ({
+const AnimatedTestimonials = ({
   title = "Testimonials Title",
   subtitle = "Testimonials Subtitle",
   description = "Testimonials Description",
@@ -171,4 +171,4 @@ const Testimonials = ({
   );
 };
 
-export default Testimonials;
+export default AnimatedTestimonials;

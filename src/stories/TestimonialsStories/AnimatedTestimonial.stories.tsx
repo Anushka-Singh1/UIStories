@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Testimonials from "../../Components/Testimonials/AnimatedTestimonial";
+import AnimatedTestimonials from "../../Components/Testimonials/AnimatedTestimonial";
 
-const meta: Meta<typeof Testimonials> = {
+const meta: Meta<typeof AnimatedTestimonials> = {
   title: "Components/Testimonials/AnimatedTestimonial",
-  component: Testimonials,
+  component: AnimatedTestimonials,
   tags: ["autodocs"],
   argTypes: {
     title: { control: "text" },
@@ -19,7 +19,7 @@ const meta: Meta<typeof Testimonials> = {
   parameters: {
     docs: {
       source: {
-            code: `
+        code: `
                 import { useEffect, useState } from "react";
                 import { FaStar } from "react-icons/fa";
                 
@@ -40,7 +40,7 @@ const meta: Meta<typeof Testimonials> = {
                   cardColor: string;
                 }
                 
-                const Testimonials = ({
+                const AnimatedTestimonials = ({
                   title = "Testimonials Title",
                   subtitle = "Testimonials Subtitle",
                   description = "Testimonials Description",
@@ -187,14 +187,14 @@ const meta: Meta<typeof Testimonials> = {
                   );
                 };
                 
-                export default Testimonials;
+                export default AnimatedTestimonials;
                 `,
       },
       description: {
         story: `**Usage Example:**\n\n
 \`\`\`tsx
 // First, import the Testimonials component
-import Testimonials from "../../Components/Testimonials/AnimatedTestimonial";
+import AnimatedTestimonials from "../../Components/Testimonials/AnimatedTestimonial";
 
 // Create an array of testimonial objects
 const sampleTestimonials = [
@@ -231,7 +231,7 @@ const sampleTestimonials = [
 ];
 
 // Use the Testimonials component in your JSX, passing the testimonials array and other necessary props
-<Testimonials 
+<AnimatedTestimonials  
   title="What Our Customers Say"
   subtitle="Customer Reviews"
   description="Real feedback from our amazing clients."
@@ -249,7 +249,7 @@ const sampleTestimonials = [
 
 export default meta;
 
-type Story = StoryObj<typeof Testimonials>;
+type Story = StoryObj<typeof AnimatedTestimonials>;
 
 const sampleTestimonials = [
   {
